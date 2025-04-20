@@ -22,7 +22,7 @@ app.get('/latest', async (req, res) => {
 
     console.log('Latest record:', results);
     if (results.length > 0) {
-      res.json({ results });
+      res.send({ results });
     } else {
       res.status(404).json({ message: 'No records found' });
     }
