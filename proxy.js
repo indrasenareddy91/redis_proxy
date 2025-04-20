@@ -20,9 +20,11 @@ app.get('/latest', async (req, res) => {
   try {
     const results = await redis.zrevrange('recent_downloads', 0, 4);
 
-    console.log('Latest record:', results);
+    const parsed = {
+      results: results.map(str => JSON.parse(str))
+    };
     if (results.length > 0) {
-      res.send({ results });
+      res.json(parsed);
     } else {
       res.status(404).json({ message: 'No records found' });
     }
